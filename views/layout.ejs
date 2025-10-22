@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title><%= title || 'X AutoEngage' %></title>
+  <link rel="stylesheet" href="/css/theme.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="/img/logo.svg" alt="logo">
+      <span>X AutoEngage</span>
+    </div>
+    <nav>
+      <% if (me) { %>
+        <a href="/" class="item"><i class="fa fa-home"></i> Home</a>
+        <% if (me.role === 'admin') { %>
+          <a href="/admin" class="item"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <% } %>
+        <a href="/logout" class="item"><i class="fa fa-sign-out"></i> Logout</a>
+      <% } else { %>
+        <a href="/" class="item"><i class="fa fa-sign-in"></i> Login</a>
+      <% } %>
+    </nav>
+    <button id="themeToggle" class="themeToggle"><i class="fa fa-moon-o"></i></button>
+  </aside>
+
+  <header class="topbar">
+    <button id="menuBtn" class="menuBtn"><i class="fa fa-bars"></i></button>
+    <% if (me) { %>
+      <div class="user">@<%= me.username %> • <%= me.role %></div>
+    <% } %>
+  </header>
+
+  <main class="main">
+    <%- body %>
+  </main>
+
+  <audio id="notifySound" src="/sound/notify.mp3" preload="auto"></audio>
+  <div class="toast"></div>
+</body>
+</html>
