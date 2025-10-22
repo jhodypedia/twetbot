@@ -2,32 +2,63 @@
 <html lang="id" class="light">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title><%= title || 'X AutoEngage' %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta name="theme-color" content="#1d9bf0">
+  <title><%= title || 'X AutoEngage Dashboard' %></title>
+
+  <!-- 🧩 FONTS & ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-v1pPCn8z5o4eZ1u1aFfg0d5rN3q3nGp36zXK9Q3zL5TQjsXbVqVGBwnOZqtrD6j6b6jSp+z2RjNgBoh8ElLNUw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+  <!-- 🪄 ANIMATIONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+
+  <!-- 🧁 SWEETALERT2 (Popup alert) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css"/>
+
+  <!-- 🎨 CUSTOM THEME -->
   <link rel="stylesheet" href="/css/theme.css">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+
+  <!-- 🧠 CORE LIBS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
+
+  <!-- ⚙️ CUSTOM APP -->
   <script src="/js/app.js" defer></script>
 </head>
+
 <body>
-  <aside class="sidebar">
+  <!-- =========================
+       SIDEBAR NAVIGATION
+  ========================== -->
+  <aside class="sidebar animate__animated animate__fadeInLeft">
     <div class="brand">
       <img src="/img/logo.svg" alt="logo">
       <span>X AutoEngage</span>
     </div>
     <nav>
       <% if (me) { %>
-        <a href="/" class="item"><i class="fa fa-home"></i> Home</a>
+        <a href="/" class="item"><i class="fa fa-house"></i> Home</a>
         <% if (me.role === 'admin') { %>
-          <a href="/admin" class="item"><i class="fa fa-dashboard"></i> Dashboard</a>
+          <a href="/admin" class="item"><i class="fa fa-gauge"></i> Dashboard</a>
         <% } %>
-        <a href="/logout" class="item"><i class="fa fa-sign-out"></i> Logout</a>
+        <a href="/logout" class="item"><i class="fa fa-right-from-bracket"></i> Logout</a>
       <% } else { %>
-        <a href="/" class="item"><i class="fa fa-sign-in"></i> Login</a>
+        <a href="/" class="item"><i class="fa fa-right-to-bracket"></i> Login</a>
       <% } %>
     </nav>
-    <button id="themeToggle" class="themeToggle"><i class="fa fa-moon-o"></i></button>
+
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="themeToggle" title="Toggle theme">
+      <i class="fa fa-moon"></i>
+    </button>
   </aside>
 
+  <!-- =========================
+       HEADER / TOPBAR
+  ========================== -->
   <header class="topbar">
     <button id="menuBtn" class="menuBtn"><i class="fa fa-bars"></i></button>
     <% if (me) { %>
@@ -35,11 +66,31 @@
     <% } %>
   </header>
 
-  <main class="main">
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+  <main class="main" data-aos="fade-up" data-aos-duration="800">
     <%- body %>
   </main>
 
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer class="footer">
+    <p>© <%= new Date().getFullYear() %> X AutoEngage — powered by PansaGroup.  
+      Built with 💙 Express + EJS + MySQL.
+    </p>
+  </footer>
+
+  <!-- =========================
+       GLOBAL ELEMENTS
+  ========================== -->
   <audio id="notifySound" src="/sound/notify.mp3" preload="auto"></audio>
   <div class="toast"></div>
+
+  <!-- INIT AOS ANIMATIONS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", ()=>{ AOS.init({ once:true, offset:60 }); });
+  </script>
 </body>
 </html>
