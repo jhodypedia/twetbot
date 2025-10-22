@@ -1,0 +1,17 @@
+<section class="hero card">
+  <div>
+    <h1 class="title">Bangun Engagement Pintar di X</h1>
+    <p>Login aman via OAuth2 PKCE. Semua aksi memakai API resmi <span class="kbd">api.x.com</span>.</p>
+    <div class="row mt16">
+      <% if (!me) { %>
+        <a class="btn" href="/login">Login with X</a>
+      <% } else { %>
+        <% if (me.role === 'admin') { %>
+          <a class="btn" href="/admin">Buka Dashboard</a>
+        <% } %>
+        <a class="btn secondary" href="/logout">Ganti Akun</a>
+      <% } %>
+    </div>
+  </div>
+  <div class="pulse"></div>
+</section>
