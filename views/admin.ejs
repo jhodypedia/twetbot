@@ -1,0 +1,43 @@
+<section class="grid">
+  <div class="card skeleton-parent">
+    <h2>Broadcast</h2>
+    <form id="formBroadcast">
+      <label>Tweet URL</label>
+      <input name="tweet_url" placeholder="https://x.com/username/status/..." required>
+      <label>Comment (optional)</label>
+      <textarea name="comment" rows="3" placeholder="Great thread! 👏"></textarea>
+      <label>Delay antar user (detik)</label>
+      <input name="delay_sec" type="number" min="0" value="<%= delayDefault %>">
+      <button class="btn" type="submit">Start Broadcast</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Settings</h2>
+    <form id="formSettings">
+      <label>Default Delay (detik)</label>
+      <input name="broadcast_delay_sec" type="number" min="0" value="<%= delayDefault %>">
+      <button class="btn" type="submit">Save</button>
+    </form>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Connected Users</h2>
+  <div class="tablewrap skeleton-parent">
+    <table>
+      <thead><tr><th>#</th><th>User</th><th>ID</th><th>Role</th><th>Expires</th></tr></thead>
+      <tbody>
+        <% users.forEach((u,i)=>{ %>
+          <tr><td><%= i+1 %></td><td>@<%= u.username %></td><td><%= u.x_user_id %></td>
+          <td><%= u.role %></td><td><%= u.expires_at ? new Date(u.expires_at).toLocaleString() : '-' %></td></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Live Logs</h2>
+  <pre id="logs" class="logs"></pre>
+</section>
